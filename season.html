@@ -1,0 +1,60 @@
+<!DOCTYPE html>
+<html lang="ar">
+<head>
+  <meta charset="UTF-8">
+  <title>فصول الموسم</title>
+  <style>
+    body {
+      font-family: sans-serif;
+      background: #111;
+      color: white;
+      padding: 20px;
+      text-align: center;
+    }
+    .chapter-link {
+      display: block;
+      margin: 10px 0;
+      padding: 10px;
+      background: #222;
+      border-radius: 8px;
+      text-decoration: none;
+      color: white;
+      font-size: 20px;
+      border: 1px solid #333;
+    }
+  </style>
+</head>
+<body>
+
+  <h1 id="season-title"></h1>
+  <div id="chapters-list"></div>
+
+  <script>
+    // قراءة رقم الموسم من الرابط
+    const params = new URLSearchParams(window.location.search);
+    const season = params.get("season");
+
+    // عدد الفصول لكل موسم (تقدر تبدلهم كي تحب)
+    const chaptersCount = {
+      1: 17,   // الموسم الأول
+      2: 14,   // الموسم الثاني
+      3: 3,    // الموسم الثالث
+    };
+
+    document.getElementById("season-title").innerText =
+      "الموسم " + season;
+
+    const container = document.getElementById("chapters-list");
+
+    // إنشاء قائمة الفصول
+    for (let i = 1; i <= chaptersCount[season]; i++) {
+      const link = document.createElement("a");
+      link.href = `chapter.html?season=${season}&chapter=${i}`;
+      link.className = "chapter-link";
+      link.innerText = "فصل " + i;
+      container.appendChild(link);
+    }
+  </script>
+
+</body>
+</html>
